@@ -3,8 +3,8 @@ vagrantfile:
     vm:
         box: puphpet/ubuntu1404-x64
         box_url: puphpet/ubuntu1404-x64
-        hostname: pet
-        memory: '512'
+        hostname: mc.araneum.dev
+        memory: '2048'
         cpus: '1'
         chosen_provider: virtualbox
         network:
@@ -100,9 +100,9 @@ nginx:
     upstreams: {  }
     vhosts:
         nxv_o2mzge0z6l71:
-            server_name: pet.unit-dev.com
+            server_name: mc.araneum.dev
             server_aliases:
-                - www.pet.unit-dev.com
+                - www.mc.araneum.dev
             www_root: /var/www/web
             listen_port: '80'
             index_files:
@@ -157,10 +157,10 @@ apache:
         - rewrite
     vhosts:
         av_072mnb45rm9v:
-            servername: awesome.dev
+            servername: mc.araneum.dev
             serveraliases:
-                - www.awesome.dev
-            docroot: /var/www/awesome
+                - www.mc.araneum.dev
+            docroot: /var/www/mc.araneum.dev
             port: '80'
             setenv:
                 - 'APP_ENV dev'
@@ -174,7 +174,7 @@ apache:
             ssl_cipher: ''
             directories:
                 avd_6dgxtgjifs00:
-                    path: /var/www/awesome
+                    path: /var/www/mc.araneum.dev
                     options:
                         - Indexes
                         - FollowSymlinks
