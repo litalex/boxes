@@ -103,7 +103,7 @@ nginx:
             server_name: mc.araneum.dev
             server_aliases:
                 - www.mc.araneum.dev
-            www_root: /var/www/web
+            www_root: /var/www/source/web
             listen_port: '80'
             index_files:
                 - index.html
