@@ -3,8 +3,8 @@ vagrantfile:
     vm:
         box: puphpet/ubuntu1404-x64
         box_url: puphpet/ubuntu1404-x64
-        hostname: am.araneum.dev
-        memory: '2048'
+        hostname: nr.araneum.dev
+        memory: '512'
         cpus: '1'
         chosen_provider: virtualbox
         network:
@@ -100,15 +100,13 @@ nginx:
     upstreams: {  }
     vhosts:
         nxv_o2mzge0z6l71:
-            server_name: am.araneum.dev
+            server_name: nr.araneum.dev
             server_aliases:
-                - www.am.araneum.dev
+                - www.nr.araneum.dev
             www_root: /var/www/source/web
             listen_port: '80'
             index_files:
-                - index.html
-                - index.htm
-                - index.php
+                - app_dev.php
             client_max_body_size: 1m
             ssl: '0'
             ssl_cert: ''
@@ -157,10 +155,10 @@ apache:
         - rewrite
     vhosts:
         av_072mnb45rm9v:
-            servername: am.araneum.dev
+            servername: nr.araneum.dev
             serveraliases:
-                - www.am.araneum.dev
-            docroot: /var/www/am.araneum.dev
+                - www.nr.araneum.dev
+            docroot: /var/www/nr.araneum.dev
             port: '80'
             setenv:
                 - 'APP_ENV dev'
@@ -174,7 +172,7 @@ apache:
             ssl_cipher: ''
             directories:
                 avd_6dgxtgjifs00:
-                    path: /var/www/am.araneum.dev
+                    path: /var/www/nr.araneum.dev
                     options:
                         - Indexes
                         - FollowSymlinks
