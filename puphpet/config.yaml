@@ -123,7 +123,7 @@ nginx:
                     try_files:
                         - $uri
                         - $uri/
-                        - /index.php$is_args$args
+                        - /app_dev.php$is_args$args
                     fastcgi: ''
                     fastcgi_index: ''
                     fastcgi_split_path: ''
@@ -133,9 +133,9 @@ nginx:
                     try_files:
                         - $uri
                         - $uri/
-                        - /index.php$is_args$args
+                        - /app_dev.php$is_args$args
                     fastcgi: '127.0.0.1:9000'
-                    fastcgi_index: index.php
+                    fastcgi_index: app_dev.php
                     fastcgi_split_path: '^(.+\.php)(/.*)$'
                     fast_cgi_params_extra:
                         - 'SCRIPT_FILENAME $request_filename'
