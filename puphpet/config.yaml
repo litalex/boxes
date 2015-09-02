@@ -3,7 +3,7 @@ vagrantfile:
     vm:
         box: puphpet/ubuntu1404-x64
         box_url: puphpet/ubuntu1404-x64
-        hostname: am.araneum.dev
+        hostname: al.araneum.dev
         memory: '2048'
         cpus: '1'
         chosen_provider: virtualbox
@@ -72,12 +72,12 @@ server:
     install: '1'
     packages:
         - git
-        - mc
+        - al
 users_groups:
     install: '1'
     groups: {  }
     users:
-        - mc
+        - al
 locale:
     install: '1'
     settings:
@@ -100,15 +100,13 @@ nginx:
     upstreams: {  }
     vhosts:
         nxv_o2mzge0z6l71:
-            server_name: am.araneum.dev
+            server_name: al.araneum.dev
             server_aliases:
-                - www.am.araneum.dev
+                - www.al.araneum.dev
             www_root: /var/www/source/web
             listen_port: '80'
             index_files:
-                - index.html
-                - index.htm
-                - index.php
+                app_dev.php
             client_max_body_size: 1m
             ssl: '0'
             ssl_cert: ''
@@ -125,7 +123,7 @@ nginx:
                     try_files:
                         - $uri
                         - $uri/
-                        - /index.php$is_args$args
+                        - /app_dev.php$is_args$args
                     fastcgi: ''
                     fastcgi_index: ''
                     fastcgi_split_path: ''
@@ -135,9 +133,9 @@ nginx:
                     try_files:
                         - $uri
                         - $uri/
-                        - /index.php$is_args$args
+                        - /app_dev.php$is_args$args
                     fastcgi: '127.0.0.1:9000'
-                    fastcgi_index: index.php
+                    fastcgi_index: app_dev.php
                     fastcgi_split_path: '^(.+\.php)(/.*)$'
                     fast_cgi_params_extra:
                         - 'SCRIPT_FILENAME $request_filename'
@@ -157,10 +155,10 @@ apache:
         - rewrite
     vhosts:
         av_072mnb45rm9v:
-            servername: am.araneum.dev
+            servername: al.araneum.dev
             serveraliases:
-                - www.am.araneum.dev
-            docroot: /var/www/am.araneum.dev
+                - www.al.araneum.dev
+            docroot: /var/www/al.araneum.dev
             port: '80'
             setenv:
                 - 'APP_ENV dev'
@@ -174,7 +172,7 @@ apache:
             ssl_cipher: ''
             directories:
                 avd_6dgxtgjifs00:
-                    path: /var/www/am.araneum.dev
+                    path: /var/www/al.araneum.dev
                     options:
                         - Indexes
                         - FollowSymlinks
@@ -199,9 +197,9 @@ php:
         php:
             - cli
             - intl
-            - mcrypt
+            - alrypt
             - curl
-            - memcached
+            - mealached
             - mysql
         pear: {  }
         pecl:
