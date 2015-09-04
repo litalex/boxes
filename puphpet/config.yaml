@@ -61,6 +61,7 @@ vagrantfile:
         port: null
         private_key_path: null
         username: vagrant
+        password: araneum
         guest_port: null
         keep_alive: true
         forward_agent: false
@@ -128,6 +129,8 @@ nginx:
                     fastcgi: ''
                     fastcgi_index: ''
                     fastcgi_split_path: ''
+                    index_files:
+                        - app_dev.php
                 nxvl_ehybn62lsfp4:
                     location: '~ \.php$'
                     autoindex: 'off'
@@ -141,6 +144,8 @@ nginx:
                     fast_cgi_params_extra:
                         - 'SCRIPT_FILENAME $request_filename'
                         - 'APP_ENV dev'
+                    index_files:
+                        - app_dev.php
     proxies: {  }
 apache:
     install: '0'
