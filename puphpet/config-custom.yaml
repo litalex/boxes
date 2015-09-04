@@ -1,0 +1,39 @@
+vagrantfile:
+    vm:
+        hostname: mc.araneum.dev
+        memory: 2048
+        cpus: 1
+        network:
+            private_network: 192.168.50.100
+            public_network: 192.168.70.100
+        synced_folder:
+            araneum.dev:
+                source: ./www/mc.araneum.dev/source
+                target: /var/www/mc.araneum.dev/source
+nginx:
+    vhosts:
+        araneum.dev:
+            server_name: mc.araneum.dev
+            server_aliases:
+                - www.mc.araneum.dev
+            www_root: /var/www/mc.araneum.dev/source/web
+            index_files:
+                - app_dev.php
+            locations:
+                nxvl_a5v3hz3wc0ua:
+                    try_files:
+                        - $uri
+                        - $uri/
+                        - /app_dev.php$is_args$args
+                nxvl_ehybn62lsfp4:
+                    try_files:
+                        - $uri
+                        - $uri/
+                        - /app_dev.php$is_args$args
+                    fastcgi: '127.0.0.1:9000'
+                    fastcgi_index: app_dev.php
+                    fastcgi_split_path: '^(.+\.php)(/.*)$'
+                    fast_cgi_params_extra:
+                        - 'SCRIPT_FILENAME $request_filename'
+                        - 'APP_ENV dev'
+    proxies: {  }

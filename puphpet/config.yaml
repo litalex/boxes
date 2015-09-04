@@ -3,13 +3,13 @@ vagrantfile:
     vm:
         box: puphpet/ubuntu1404-x64
         box_url: puphpet/ubuntu1404-x64
-        hostname: nr.araneum.dev
-        memory: '512'
+        hostname: araneum.dev
+        memory: '2048'
         cpus: '1'
         chosen_provider: virtualbox
         network:
-            public_network: ~
             private_network: 192.168.50.100
+            public_network: ~
             forwarded_port:
                 vflnp_k0nlxdpl9gfc:
                     host: '7249'
@@ -34,9 +34,9 @@ vagrantfile:
                     - '--hiera_config /vagrant/puphpet/puppet/hiera.yaml'
                     - '--parser future'
         synced_folder:
-            vflsf_u6ceoxo1th4y:
-                source: ./
-                target: /var/www
+            araneum.dev:
+                source: ./www/araneum.dev/source
+                target: /var/www/araneum.dev/source
                 sync_type: default
                 smb:
                     smb_host: ''
@@ -76,8 +76,7 @@ server:
 users_groups:
     install: '1'
     groups: {  }
-    users:
-        - mc
+    users: {  }
 locale:
     install: '1'
     settings:
@@ -99,11 +98,11 @@ nginx:
         proxy_buffers: '4 256k'
     upstreams: {  }
     vhosts:
-        nxv_o2mzge0z6l71:
-            server_name: nr.araneum.dev
+        araneum.dev:
+            server_name: araneum.dev
             server_aliases:
-                - www.nr.araneum.dev
-            www_root: /var/www/source/web
+                - www.araneum.dev
+            www_root: /var/www/araneum.dev/source/web
             listen_port: '80'
             index_files:
                 - app_dev.php
@@ -155,10 +154,10 @@ apache:
         - rewrite
     vhosts:
         av_072mnb45rm9v:
-            servername: nr.araneum.dev
+            servername: araneum.dev
             serveraliases:
-                - www.nr.araneum.dev
-            docroot: /var/www/nr.araneum.dev
+                - www.araneum.dev
+            docroot: /var/www/araneum.dev
             port: '80'
             setenv:
                 - 'APP_ENV dev'
@@ -172,7 +171,7 @@ apache:
             ssl_cipher: ''
             directories:
                 avd_6dgxtgjifs00:
-                    path: /var/www/nr.araneum.dev
+                    path: /var/www/araneum.dev
                     options:
                         - Indexes
                         - FollowSymlinks
@@ -332,7 +331,7 @@ postgresql:
     grants: {  }
     adminer: 0
 mongodb:
-    install: '1'
+    install: '0'
     settings:
         auth: 1
         bind_ip: 127.0.0.1
