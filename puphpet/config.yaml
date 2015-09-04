@@ -122,6 +122,8 @@ nginx:
                 nxvl_a5v3hz3wc0ua:
                     location: /
                     autoindex: 'off'
+                    index_files:
+                        - app_dev.php
                     try_files:
                         - $uri
                         - $uri/
@@ -129,11 +131,11 @@ nginx:
                     fastcgi: ''
                     fastcgi_index: ''
                     fastcgi_split_path: ''
-                    index_files:
-                        - app_dev.php
                 nxvl_ehybn62lsfp4:
                     location: '~ \.php$'
                     autoindex: 'off'
+                    index_files:
+                        - app_dev.php
                     try_files:
                         - $uri
                         - $uri/
@@ -144,8 +146,6 @@ nginx:
                     fast_cgi_params_extra:
                         - 'SCRIPT_FILENAME $request_filename'
                         - 'APP_ENV dev'
-                    index_files:
-                        - app_dev.php
     proxies: {  }
 apache:
     install: '0'
