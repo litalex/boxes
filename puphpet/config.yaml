@@ -35,8 +35,8 @@ vagrantfile:
                     - '--parser future'
         synced_folder:
             araneum.dev:
-                source: ./www/araneum.dev/source
-                target: /var/www/araneum.dev/source
+                source: ./www
+                target: /var/www
                 sync_type: default
                 smb:
                     smb_host: ''
@@ -101,11 +101,11 @@ nginx:
         proxy_buffers: '4 256k'
     upstreams: {  }
     vhosts:
-        araneum.dev:
-            server_name: araneum.dev
+        core.araneum.dev:
+            server_name: core.araneum.dev
             server_aliases:
-                - www.araneum.dev
-            www_root: /var/www/araneum.dev/source/web
+                - www.core.araneum.dev
+            www_root: /var/www/core.araneum.dev/source/web
             listen_port: '80'
             index_files:
                 - app_dev.php
@@ -119,7 +119,7 @@ nginx:
             rewrite_to_https: '1'
             spdy: '1'
             locations:
-                nxvl_a5v3hz3wc0ua:
+                core_a5v3hz3wc0ua:
                     location: /
                     autoindex: 'off'
                     index_files:
@@ -131,7 +131,97 @@ nginx:
                     fastcgi: ''
                     fastcgi_index: ''
                     fastcgi_split_path: ''
-                nxvl_ehybn62lsfp4:
+                core_ehybn62lsfp4:
+                    location: '~ \.php$'
+                    autoindex: 'off'
+                    index_files:
+                        - app_dev.php
+                    try_files:
+                        - $uri
+                        - $uri/
+                        - /app_dev.php$is_args$args
+                    fastcgi: '127.0.0.1:9000'
+                    fastcgi_index: app_dev.php
+                    fastcgi_split_path: '^(.+\.php)(/.*)$'
+                    fast_cgi_params_extra:
+                        - 'SCRIPT_FILENAME $request_filename'
+                        - 'APP_ENV dev'
+        aggregator.araneum.dev:
+            server_name: aggregator.araneum.dev
+            server_aliases:
+                - www.aggregator.araneum.dev
+            www_root: /var/www/aggregator.araneum.dev/source/web
+            listen_port: '80'
+            index_files:
+                - app_dev.php
+            client_max_body_size: 1m
+            ssl: '0'
+            ssl_cert: ''
+            ssl_key: ''
+            ssl_port: '443'
+            ssl_protocols: ''
+            ssl_ciphers: ''
+            rewrite_to_https: '1'
+            spdy: '1'
+            locations:
+                aggregator_a5v3hz3wc0ua:
+                    location: /
+                    autoindex: 'off'
+                    index_files:
+                        - app_dev.php
+                    try_files:
+                        - $uri
+                        - $uri/
+                        - /app_dev.php$is_args$args
+                    fastcgi: ''
+                    fastcgi_index: ''
+                    fastcgi_split_path: ''
+                aggregator_ehybn62lsfp4:
+                    location: '~ \.php$'
+                    autoindex: 'off'
+                    index_files:
+                        - app_dev.php
+                    try_files:
+                        - $uri
+                        - $uri/
+                        - /app_dev.php$is_args$args
+                    fastcgi: '127.0.0.1:9000'
+                    fastcgi_index: app_dev.php
+                    fastcgi_split_path: '^(.+\.php)(/.*)$'
+                    fast_cgi_params_extra:
+                        - 'SCRIPT_FILENAME $request_filename'
+                        - 'APP_ENV dev'
+        cluster.araneum.dev:
+            server_name: cluster.araneum.dev
+            server_aliases:
+                - www.cluster.araneum.dev
+            www_root: /var/www/cluster.araneum.dev/source/web
+            listen_port: '80'
+            index_files:
+                - app_dev.php
+            client_max_body_size: 1m
+            ssl: '0'
+            ssl_cert: ''
+            ssl_key: ''
+            ssl_port: '443'
+            ssl_protocols: ''
+            ssl_ciphers: ''
+            rewrite_to_https: '1'
+            spdy: '1'
+            locations:
+                cluster_a5v3hz3wc0ua:
+                    location: /
+                    autoindex: 'off'
+                    index_files:
+                        - app_dev.php
+                    try_files:
+                        - $uri
+                        - $uri/
+                        - /app_dev.php$is_args$args
+                    fastcgi: ''
+                    fastcgi_index: ''
+                    fastcgi_split_path: ''
+                cluster_ehybn62lsfp4:
                     location: '~ \.php$'
                     autoindex: 'off'
                     index_files:
@@ -230,9 +320,11 @@ php:
 xdebug:
     install: '1'
     settings:
+        xdebug.remote_host: 10.0.2.2
+        xdebug.idekey: 'vagrant'
         xdebug.default_enable: '1'
-        xdebug.remote_autostart: '0'
-        xdebug.remote_connect_back: '1'
+        xdebug.remote_autostart: '1'
+        xdebug.remote_connect_back: '0'
         xdebug.remote_enable: '1'
         xdebug.remote_handler: dbgp
         xdebug.remote_port: '9000'
